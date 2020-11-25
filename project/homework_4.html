@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework_4</title>
+</head>
+<body>
+<script>
+
+
+let text = "Lorem ipsum 'dolor sit amet', consectetur adipisicing elit. 'Ad adipisci architecto assumenda'"
+
+// task_01
+
+console.log(text.replace(/'/gm, '"'))
+
+// task_02
+
+let text2 = "Lorem ipsum 'dolor sit's amet', consectetur adipisicing elit's. 'Ad adipisci architecto assumenda'"
+
+console.log(text2.replace(/'/gm, '"').replace(/\b"\b/gm, "'"))
+
+</script>
+
+</body>
+</html>
