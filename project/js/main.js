@@ -5,7 +5,9 @@ const app = new Vue({
     data: {
         catalogUrl: '/catalogData.json',
         products: [],
-        imgCatalog: 'https://placehold.it/200x150'
+        imgCatalog: 'https://placehold.it/200x150',
+        searchLine: '',
+        isVisibleCard: false
     },
     methods: {
         getJson(url) {
@@ -17,6 +19,21 @@ const app = new Vue({
         },
         addProduct(product) {
             console.log(product.id_product);
+        },
+        filterGoods() {
+            console.log(this.searchLine)
+            const regexp = new RegExp(this.searchLine, 'i');
+            let searchProduct = this.products.filter(product => regexp.test(product.product_name));
+            this.products.forEach (product => {
+                if (!searchProduct.includes(product)) {
+                    product.visible = false;
+                } else {
+                    product.visible = true;
+                }
+            })
+        },
+        changeVisibleBasket() {
+            this.isVisibleCard ? this.isVisibleCard = false : this.isVisibleCard = true;
         }
     },
     beforeCreate() {
@@ -26,6 +43,7 @@ const app = new Vue({
         this.getJson(`${API + this.catalogUrl}`)
             .then(data => {
                 for (let el of data) {
+                    el.visible = true
                     this.products.push(el);
                 }
             });

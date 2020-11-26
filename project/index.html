@@ -11,18 +11,20 @@
     <header>
         <div class="logo">Интернет-магазин</div>
         <div class="cart">
-            <form action="#" class="search-form">
-                <input type="text" class="search-field">
-                <button class="btn-search" type="submit">
+            <form action="#" class="search-form" >
+                <input type="text" class="search-field" v-model.lazy="searchLine">
+                <button class="btn-search" type="submit" @click="filterGoods">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-            <button class="btn-cart" type="button">Корзина</button>
+            <button class="btn-cart" type="button" @click="changeVisibleBasket">Корзина</button>
+            <div class="cart-block" :class="{ invisible: !isVisibleCard }"></div>
         </div>
     </header>
     <main>
         <div class="products">
-            <div class="product-item" v-for="product of products" :key="product.id_product">
+            <div :class="{ invisible: products.length > 0 }"><h3>Список товаров пуст</h3></div>
+            <div class="product-item" v-for="product of products" :key="product.id_product" :class="{ invisible: !product.visible }">
                 <img :src="imgCatalog" alt="Some img">
                 <div class="desc">
                     <h3>{{product.product_name}}</h3>
