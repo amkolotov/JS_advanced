@@ -16,4 +16,5 @@ const del = (cart, req) => {
 module.exports = {
   add,
   change,
+  del
 };
