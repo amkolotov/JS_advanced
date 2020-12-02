@@ -1,5 +1,5 @@
 Vue.component('products', {
-    data(){
+    data() {
         return {
             catalogUrl: '/catalogData.json',
             products: [],
@@ -8,8 +8,9 @@ Vue.component('products', {
         }
     },
     methods: {
-        filter(){
-            let regexp = new RegExp(this.userSearch, 'i');
+        filter(value){
+            console.log(value)
+            let regexp = new RegExp(value, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
     },
@@ -28,6 +29,7 @@ Vue.component('products', {
         </div>
     `
 });
+
 Vue.component('product', {
     props: ['product', 'img'],
     data() {
@@ -57,3 +59,4 @@ Vue.component('product', {
       this.cartAPI = this.$root.$refs.cart; // добираемся до компонента корзины, чтобы далее использовать метод добавления
     },
 });
+
