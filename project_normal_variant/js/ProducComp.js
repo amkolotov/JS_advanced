@@ -1,5 +1,5 @@
 Vue.component('products', {
-    data() {
+    data(){
         return {
             catalogUrl: '/catalogData.json',
             products: [],
@@ -9,7 +9,6 @@ Vue.component('products', {
     },
     methods: {
         filter(value){
-            console.log(value)
             let regexp = new RegExp(value, 'i');
             this.filtered = this.products.filter(el => regexp.test(el.product_name));
         }
@@ -29,7 +28,6 @@ Vue.component('products', {
         </div>
     `
 });
-
 Vue.component('product', {
     props: ['product', 'img'],
     data() {
@@ -39,7 +37,7 @@ Vue.component('product', {
            * то мы легко можем получить доступ к ним используя свойство $root.
            * $parent можно использовать для доступа к родительскому экземпляру из дочернего.
            */
-          cartAPI: null,
+          cartAPI: this.$root.$refs.cart,
       };
     },
 
@@ -54,9 +52,5 @@ Vue.component('product', {
 <!-- 2                    <button class="buy-btn" @click="$parent.$parent.$refs.cart.addProduct(product)">Купить</button>-->
                 </div>
             </div>
-    `,
-    mounted() {
-      this.cartAPI = this.$root.$refs.cart; // добираемся до компонента корзины, чтобы далее использовать метод добавления
-    },
+    `
 });
-
